@@ -1,9 +1,12 @@
 const express = require('express');
+const cors = require('cors')
 const { default: mongoose } = require('mongoose');
 const app = express();
+
 const PORT = 3001;
 
 app.use(express.json())
+app.use(cors())
 
 const DbConnection = async () => {
     try {
