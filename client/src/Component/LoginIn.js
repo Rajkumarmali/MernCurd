@@ -16,9 +16,14 @@ export default function LoginIn() {
                 },
                 body: JSON.stringify({ email, password }),
             })
-            const data = await res.text();
-            console.log(data);
-            navigate('/student');
+            const data = await res.json();
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                navigate('/student');
+            } else {
+                console.log("Login Failed");
+            }
+            // 
         } catch (err) {
             console.log(err);
         }

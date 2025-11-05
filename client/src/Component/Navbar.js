@@ -1,7 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
+
+    const navigate = useNavigate();
+
+    const LogOut = () => {
+        localStorage.removeItem('token');
+        navigate('/login')
+    }
+
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">
@@ -19,17 +27,24 @@ export default function Navbar() {
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
-                                Profile
-                            </a>
-                        </li>
+                        {
+                            (localStorage.getItem('token')) &&
+                            <li className="nav-item">
+                                <a className="nav-link active" aria-current="page" href="#">
+                                    Profile
+                                </a>
+                            </li>
+                        }
                     </ul>
-
-                    <div className="d-flex">
-                        <Link to="/login" className="btn btn-outline-success" >LogIn</Link>
-                        <Link to="/signin" className="btn btn-outline-success" >SignIn</Link>
-                    </div>
+                    {
+                        (localStorage.getItem('token')) ? <div>
+                            <button onClick={LogOut} className="btn btn-outline-success">LogOut</button>
+                        </div> :
+                            <div className="d-flex">
+                                <Link to="/login" className="btn btn-outline-success" >LogIn</Link>
+                                <Link to="/signin" className="btn btn-outline-success" >SignIn</Link>
+                            </div>
+                    }
                 </div>
             </div>
         </nav>
