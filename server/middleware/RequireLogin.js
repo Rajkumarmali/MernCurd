@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
         const token = authorizationHeaders.split(" ")[1];
         jwt.verify(token, "qwertyuiopasdfghjklzxcvbnm", (err, decoded) => {
             if (err) {
-                return res.send("Invalid tokem")
+                return res.send("Invalid token")
             }
             req.userId = decoded.userId;
             next();

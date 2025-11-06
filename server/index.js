@@ -21,8 +21,11 @@ app.get('/', (req, res) => {
     res.send("Hello world");
 })
 
-const UserRouter = require('./routes/UserRoute')
+const UserRouter = require('./routes/UserRouter')
 app.use('/api', UserRouter);
+
+const StudentRouter = require('./routes/StudentRouter');
+app.use('/api', StudentRouter);
 
 DbConnection();
 app.listen(PORT, () => {
