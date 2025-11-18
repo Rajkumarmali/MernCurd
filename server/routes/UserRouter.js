@@ -2,6 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const User = require('../Models/user');
+const RequireLogin = require('../middleware/RequireLogin');
 const router = express.Router();
 
 const secret = "qwertyuiopasdfghjklzxcvbnm"
@@ -33,6 +34,10 @@ router.post('/login', async (req, res) => {
     }
     const token = await jwt.sign(data, secret)
     res.send({ token: token });
+})
+router.get('/usrProfile', RequireLogin, async (req, res) => {
+    const user = await User.findById(req.userId)
+    res.send(user);
 })
 
 module.exports = router;
