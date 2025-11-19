@@ -29,11 +29,18 @@ export default function Navbar() {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         {
                             (localStorage.getItem('token')) &&
-                            <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">
-                                    Profile
-                                </a>
-                            </li>
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <Link to="/profile" className="nav-link active" >
+                                        Profile
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/student" className="nav-link active" >
+                                        Students
+                                    </Link>
+                                </li>
+                            </ul>
                         }
                     </ul>
                     {
